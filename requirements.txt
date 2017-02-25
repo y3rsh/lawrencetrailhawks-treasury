@@ -1,1 +1,5 @@
+pytest
 sqlalchemy
+gspread
+oauth2client
+bumpversion
