@@ -9,7 +9,7 @@ Base = declarative_base()
 engine = None
 session = None
 
-class Transaction(Base):
+class LineItem(Base):
     __tablename__ = 'transactions'
     __table_args__ = {'sqlite_autoincrement': True}
     ledgerId = Column(Integer, primary_key=True)
@@ -23,7 +23,7 @@ class Transaction(Base):
     actionCompleteDate = Column(String(50))
 
     def __repr__(self):
-        return "<Transaction(ledgerId='%s', description='%s', amount='%s')>" % (self.ledgerId, self.description, self.amount)
+        return "<LineItem(ledgerId='%s', description='%s', amount='%s')>" % (self.ledgerId, self.description, self.amount)
 
 
 engine = create_engine('sqlite:///:memory:', echo=True)

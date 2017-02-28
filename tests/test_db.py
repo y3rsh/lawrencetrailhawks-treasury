@@ -1,5 +1,5 @@
-import src.model.transaction
-from src.model.transaction import Transaction, session
+import src.model.line_item
+from src.model.line_item import LineItem, session
 import src.sheets.spreadsheet
 from src.sheets.spreadsheet import get_sheet
 
@@ -8,14 +8,14 @@ myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../')
 
 def test_ledger_creation():
-  transaction  = Transaction(ledgerId=None, eventCode='2017hawkExpense', receipt='', description='Park Donation', amount= '200.00', raceExpenseType='park donation', action='', payee='', actionCompleteDate='')
-  session.add(transaction)
-  our_user = session.query(Transaction).filter_by(description='Park Donation').first()
-  assert  our_user == transaction
+  line_item  = LineItem(ledgerId=None, eventCode='2017hawkExpense', receipt='', description='Park Donation', amount= '200.00', raceExpenseType='park donation', action='', payee='', actionCompleteDate='')
+  session.add(line_item)
+  our_user = session.query(LineItem).filter_by(description='Park Donation').first()
+  assert  our_user == line_item
 
 def test_persistance_of_record():
-  our_user = session.query(Transaction).filter_by(description='Park Donation').first()
-  print (f"ledger id = {our_user.ledgerId}, description = {our_user.description}")
+  our_user = session.query(LineItem).filter_by(description='Park Donation').first()
+  print (f"ledgerid = {our_user.ledgerId}, description = {our_user.description}")
   assert our_user.description == 'Park Donation'
 
 def test_getsheet():
