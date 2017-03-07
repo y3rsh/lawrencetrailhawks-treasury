@@ -19,6 +19,37 @@ def test_persistance_of_record():
   assert our_user.description == 'Park Donation'
 
 def test_getsheet():
-  data = get_sheet("2017Hawk")
+  data = get_sheet("2017Hawk", "Sheet1")
+  # data = get_sheet("2017Nighthawk", "Sheet1")
+  # data = get_sheet("2017PiDay", "Sheet1")
+  # data = get_sheet("2017Shuffle", "Sheet1")
+  # data = get_sheet("2017Snake", "Sheet1")
+  # data = get_sheet("2017Ultrasignup", "Sheet1")
+  # data = get_sheet("2017Ledger", "Sheet1")
+  # data = get_sheet("2017TestLedger", "Sheet1")
   description = [d for d in data if d["description"] == 'Park Donation ']
   assert description[0]["description"] == 'Park Donation '
+
+def test_insertsheet():
+  setup_test_sheet()
+  our_user = session.query(LineItem).filter_by(description='Mile 90 Photography').first()
+  print("look: ",our_user)
+
+def test_write_back():
+  setup_test_sheet()
+  row = session.query(LineItem).filter_by(description='Mile 90 Photography').first()
+  before_description = row.description
+  print("before: ", row)
+  row.description = row.description + " wut"
+  altered_id = row.id
+  session.commit()
+  row = session.query(LineItem).filter_by(id=altered_id).first()
+  after_description = row.description
+  print("after: ", row)
+  assert before_description != after_description
+
+def setup_test_sheet():
+  data = get_sheet("2017TestLedger", "Sheet1")
+  for val in data:
+    session.add(LineItem(**val))
+  session.commit()
