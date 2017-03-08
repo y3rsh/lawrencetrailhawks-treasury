@@ -18,7 +18,7 @@ class LineItem(Base):
     receipt = Column(String(50))
     check = Column(String(50))
     description = Column(String(200))
-    amount = Column(Numeric)
+    amount = Column(String(200))
     breakout = Column(String(50))
     reconciled = Column(String(50))
     transactionGroup = Column(String(50))

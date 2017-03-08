@@ -14,8 +14,8 @@ def get_sheet(worksheet_name, worksheet_title):
 
   # Extract and print all of the values
   list_of_hashes = sheet.get_all_records()
-  remove_characters(list_of_hashes)
-  print(list_of_hashes)
+  #remove_characters(list_of_hashes)
+  #print(list_of_hashes)
   return list_of_hashes
 
 def remove_characters(data):
